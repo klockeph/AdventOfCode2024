@@ -1,7 +1,7 @@
 module Day02 (day02) where
 
 readInput :: IO [String]
-readInput = lines <$> readFile "data/day2/input.txt"
+readInput = lines <$> readFile "data/day02/input.txt"
 
 parseLine :: String -> [Int]
 parseLine x = read <$> (words x)

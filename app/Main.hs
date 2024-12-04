@@ -2,6 +2,8 @@ module Main where
 
 import Day01 (day01)
 import Day02 (day02)
+import Day03 (day03)
+import Day04 (day04)
 import System.Environment (getArgs)
 
 main :: IO ()
@@ -10,9 +12,9 @@ main = do
   case args of
     "01" : _ -> day01
     "02" : _ -> day02
-{-
     "03" : _ -> day03
     "04" : _ -> day04
+{-
     "05" : _ -> day05
     "06" : _ -> day06
     "07" : _ -> day07

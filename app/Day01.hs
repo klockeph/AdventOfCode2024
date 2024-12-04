@@ -3,7 +3,7 @@ module Day01 (day01) where
 import Data.List ( sort )
 
 readInput :: IO [String]
-readInput = lines <$> readFile "data/day1/input.txt"
+readInput = lines <$> readFile "data/day01/input.txt"
 
 parseOneLine :: String -> (Int, Int)
 parseOneLine str =
