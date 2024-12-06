@@ -1,8 +1,7 @@
 module Day03 (day03) where
 
-import Lib (readInputForDay)
+import Lib (readInputForDay, readNumMax)
 
-import Data.Char (isDigit)
 import Data.List (isPrefixOf)
 
 readFixed :: String -> String -> Maybe String
@@ -10,18 +9,12 @@ readFixed needle s
     | needle `isPrefixOf` s = Just $ drop (length needle) s
     | otherwise = Nothing
 
-readNum :: String -> Maybe (Int, String)
-readNum s = 
-    let ds = takeWhile isDigit s in
-    let dl = length ds in
-    if dl > 0 && dl <= 3 then Just (read ds, dropWhile isDigit s) else Nothing
-
 readMul :: String -> Maybe (Int, Int, String)
 readMul s = do
     s1 <- readFixed "mul(" s
-    (x, s2) <- readNum s1
+    (x, s2) <- readNumMax 999 s1
     s3 <- readFixed "," s2
-    (y, s4) <- readNum s3
+    (y, s4) <- readNumMax 999 s3
     s5 <- readFixed ")" s4
     pure (x, y, s5)
 
