@@ -1,6 +1,6 @@
 module Day04 (day04) where
 
-import Lib (readInputForDay)
+import Lib (readInputForDay, (+^), (*^))
 import Data.Array
 
 parse :: [String] -> Array (Int, Int) Char
@@ -15,12 +15,6 @@ get arr idx
   | inRange (bounds arr) idx = Just (arr ! idx)
   | otherwise = Nothing
 
-(+^) :: (Num a, Num b) => (a, b) -> (a, b) -> (a, b)
-(x1, y1) +^ (x2, y2) = (x1 + x2, y1 + y2)
-
-(*^) :: Num a => (a, a) -> a -> (a, a)
-(x, y) *^ s = (x * s, y * s)
-
 scanForXmas :: Array (Int, Int) Char -> (Int, Int) -> (Int, Int) -> Maybe ()
 scanForXmas arr pos dir = do
     c1 <- get arr pos
@@ -29,8 +23,11 @@ scanForXmas arr pos dir = do
     c4 <- get arr (pos +^ (dir *^ 3))
     if c1:c2:c3:c4:[] == "XMAS" then Just () else Nothing
 
+axisDirs :: [(Int, Int)]
 axisDirs = [(-1,0),(0,-1),(1,0),(0,1)]
+diagonalDirs :: [(Int, Int)]
 diagonalDirs = [(-1,-1),(-1,1),(1,-1),(1,1)]
+allDirs :: [(Int, Int)]
 allDirs = axisDirs ++ diagonalDirs
 
 findXmasAt :: Array (Int, Int) Char -> (Int, Int) -> Int

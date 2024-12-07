@@ -20,3 +20,9 @@ parseList :: Read a => String -> [a]
 parseList s = map read (splitOn "," s)
 
 
+-- Vector operations for poor people
+(+^) :: (Num a, Num b) => (a, b) -> (a, b) -> (a, b)
+(x1, y1) +^ (x2, y2) = (x1 + x2, y1 + y2)
+
+(*^) :: Num a => (a, a) -> a -> (a, a)
+(x, y) *^ s = (x * s, y * s)
