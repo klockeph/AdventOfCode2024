@@ -17,8 +17,10 @@ readNumMax :: Int -> String -> Maybe (Int, String)
 readNumMax m s = readPosNum s >>= \(num,str) -> if num <= m then Just (num,str) else Nothing
 
 parseList :: Read a => String -> [a]
-parseList s = map read (splitOn "," s)
+parseList = parseListOn ","
 
+parseListOn :: Read a => String -> String -> [a]
+parseListOn splitter s = read <$> splitOn splitter s
 
 -- Vector operations for poor people
 (+^) :: (Num a, Num b) => (a, b) -> (a, b) -> (a, b)

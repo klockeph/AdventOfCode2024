@@ -6,6 +6,7 @@ import Day03 (day03)
 import Day04 (day04)
 import Day05 (day05)
 import Day06 (day06)
+import Day07 (day07)
 import Lib (readInputForDay)
 
 import System.Environment (getArgs)
@@ -20,8 +21,8 @@ main = do
     "04" : _ -> day04
     "05" : _ -> day05
     "06" : _ -> day06 =<< readInputForDay 6
+    "07" : _ -> day07 =<< readInputForDay 7
 {-
-    "07" : _ -> day07
     "08" : _ -> day08
     "09" : _ -> day09
     "10" : _ -> day10
