@@ -9,22 +9,24 @@ parse s = fromJust tryParse
         (num, r) <- readPosNum s
         return (num, parseListOn " " $ drop 2 r)
 
--- multiplies or adds x to every element of the list
-addmul :: Int -> [Int] -> [Int]
-addmul x is = [(*), (+)] <*> [x] <*> is
+applyOps :: [Int -> Int -> Int] -> [Int] -> Int  -> [Int]
+applyOps ops is x = ops <*> is <*> [x]
 
-allOptions :: [Int] -> [Int]
-allOptions l = foldl (flip addmul) [head l] (tail l)
+allOptions :: [Int -> Int -> Int] -> [Int] -> [Int]
+allOptions ops l = foldl (applyOps ops) [head l] (tail l)
 
 solvable :: Int -> [Int] -> Int
 solvable x l = if x `elem` l then x else 0
 
-solve1 :: [(Int, [Int])] -> Int
-solve1 l = sum $ (\(x, is) -> solvable x $ allOptions is) <$> l
+solve :: [Int->Int->Int] -> [(Int, [Int])] -> Int
+solve ops l = sum $ (\(x, is) -> solvable x $ allOptions ops is) <$> l
+
+concatNums :: Int -> Int -> Int
+concatNums x y = read (show x ++ show y)
 
 day07 :: [String] -> IO ()
 day07 input = do
-    -- let input = testinput
+--     let input = testinput
     let parsed = parse <$> input
-    print $ solve1 parsed
-    return ()
+    print $ solve [(*),(+)] parsed
+    print $ solve [(*),(+),concatNums] parsed
